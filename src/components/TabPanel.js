@@ -5,7 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import TagsComp from './TagsComp';
+import ReactAutosuggest from './AutoSuggest'
 
 
 function TabPanel(props) {
@@ -49,6 +49,11 @@ const styles = theme => ({
   },
 })
 
+const designDefaultValues = []
+const constructionDefaultValues = []
+const analysisDefaultValues = []
+
+
 class VerticalTabs extends Component {
   state = {
       value: 1
@@ -62,6 +67,7 @@ class VerticalTabs extends Component {
 
     const { classes } = this.props;
     const { value } = this.state;
+    const suggestions = ['test1', 'test2', 'test3'];
     
     return (
       <div className={classes.root}>
@@ -78,7 +84,9 @@ class VerticalTabs extends Component {
           <Tab label="Construction" {...a11yProps(2)} />
         </Tabs>
         <TabPanel value={value} index={0}>
-          <TagsComp />
+          <ReactAutosuggest 
+            suggestions={suggestions}
+          />
         </TabPanel>
         <TabPanel value={value} index={1}>
           Item Two
