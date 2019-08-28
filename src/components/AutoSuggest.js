@@ -8,42 +8,11 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { withStyles } from '@material-ui/core/styles'
 import ChipInput from 'material-ui-chip-input'
 import Sliders from './SliderPanel'
+import Grid from '@material-ui/core/Grid'
 
 const suggestions = [
   { name: 'Afghanistan' },
-  { name: 'Aland Islands' },
-  { name: 'Albania' },
-  { name: 'Algeria' },
-  { name: 'American Samoa' },
-  { name: 'Andorra' },
-  { name: 'Angola' },
-  { name: 'Anguilla' },
-  { name: 'Antarctica' },
-  { name: 'Antigua and Barbuda' },
-  { name: 'Argentina' },
-  { name: 'Armenia' },
-  { name: 'Aruba' },
-  { name: 'Australia' },
-  { name: 'Austria' },
-  { name: 'Azerbaijan' },
-  { name: 'Bahamas' },
-  { name: 'Bahrain' },
-  { name: 'Bangladesh' },
-  { name: 'Barbados' },
-  { name: 'Belarus' },
-  { name: 'Belgium' },
-  { name: 'Belize' },
-  { name: 'Benin' },
-  { name: 'Bermuda' },
-  { name: 'Bhutan' },
-  { name: 'Bolivia, Plurinational State of' },
-  { name: 'Bonaire, Sint Eustatius and Saba' },
-  { name: 'Bosnia and Herzegovina' },
-  { name: 'Botswana' },
-  { name: 'Bouvet Island' },
-  { name: 'Brazil' },
-  { name: 'British Indian Ocean Territory' },
-  { name: 'Brunei Darussalam' }
+  { name: 'Aland Islands' }
 ]
 
 function renderInput (inputProps) {
@@ -51,6 +20,8 @@ function renderInput (inputProps) {
 
   return (
     <ChipInput
+      fullWidthInput='true'
+      helperText='Input or select skill from list'
       clearInputValueOnChange
       onUpdateInput={onChange}
       value={chips}
@@ -123,7 +94,8 @@ function getSuggestions (value) {
 const styles = theme => ({
   container: {
     flexGrow: 1,
-    position: 'relative'
+    position: 'relative',
+    fullWidth: 'true',
   },
   suggestionsContainerOpen: {
     position: 'absolute',
@@ -143,7 +115,7 @@ const styles = theme => ({
   },
   textField: {
     width: '100%'
-  }
+  },
 })
 
 class ReactAutosuggest extends React.Component {
@@ -194,35 +166,39 @@ class ReactAutosuggest extends React.Component {
     const { classes, suggestions, ...other } = this.props
 
     return (
-      <div>
-      <Autosuggest
-        theme={{
-          container: classes.container,
-          suggestionsContainerOpen: classes.suggestionsContainerOpen,
-          suggestionsList: classes.suggestionsList,
-          suggestion: classes.suggestion
-        }}
-        renderInputComponent={renderInput}
-        suggestions={this.state.suggestions}
-        onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
-        renderSuggestionsContainer={renderSuggestionsContainer}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        onSuggestionSelected={(e, { suggestionValue }) => { this.handleAddChip(suggestionValue); e.preventDefault() }}
-        focusInputOnSuggestionClick={false}
-        inputProps={{
-          chips: this.state.value,
-          value: this.state.textFieldInput,
-          onChange: this.handletextFieldInputChange,
-          onAdd: (chip) => this.handleAddChip(chip),
-          onDelete: (chip, index) => this.handleDeleteChip(chip, index),
-          ...other
-        }}
+      <Grid spacing={3} alignItems="flex-start" justify="center" container ClassName={classes.grid}>
+        <Grid item xs={12} md={6}>
+          <Autosuggest
+            theme={{
+              container: classes.container,
+              suggestionsContainerOpen: classes.suggestionsContainerOpen,
+              suggestionsList: classes.suggestionsList,
+              suggestion: classes.suggestion
+            }}
+            renderInputComponent={renderInput}
+            suggestions={this.state.suggestions}
+            onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
+            renderSuggestionsContainer={renderSuggestionsContainer}
+            getSuggestionValue={getSuggestionValue}
+            renderSuggestion={renderSuggestion}
+            onSuggestionSelected={(e, { suggestionValue }) => { this.handleAddChip(suggestionValue); e.preventDefault() }}
+            focusInputOnSuggestionClick={false}
+            inputProps={{
+              chips: this.state.value,
+              value: this.state.textFieldInput,
+              onChange: this.handletextFieldInputChange,
+              onAdd: (chip) => this.handleAddChip(chip),
+              onDelete: (chip, index) => this.handleDeleteChip(chip, index),
+              ...other
+            }}
 
-      />
-      <Sliders chipTextBoxValue={this.state.value} />
-      </div>
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Sliders chipTextBoxValue={this.state.value}/>
+        </Grid>
+      </Grid>
     )
   }
 }

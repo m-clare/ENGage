@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
-import withStyles from '@material-ui/styles/withStyles';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import ReactAutosuggest from './AutoSuggest'
-
+import ReactAutosuggest from './AutoSuggest';
+import Chart from 'react-google-charts';
+import Grid from '@material-ui/core/Grid';
+import TagsComp from './TagsComp';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -16,8 +19,8 @@ function TabPanel(props) {
       component="div"
       role="tabpanel"
       hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
       <Box p={3}>{children}</Box>
@@ -33,70 +36,88 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
   };
 }
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
-    display: 'flex',
+    'max-height': '800px',
+    'overflow': 'hidden'
   },
-  tabs: {
-    borderRight: `1px solid ${theme.palette.divider}`,
-  },
-})
+}));
 
-const designDefaultValues = []
-const constructionDefaultValues = []
-const analysisDefaultValues = []
+const fieldSuggestions = ['test1', 'test2', 'test3']
+export default function SimpleTabs() {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
 
-
-class VerticalTabs extends Component {
-  state = {
-      value: 1
-  };
-
-  handleChange = (event, value) => {
-    this.setState({value: value})
+  function handleChange(event, newValue) {
+    setValue(newValue);
   }
 
-  render() {
-
-    const { classes } = this.props;
-    const { value } = this.state;
-    const suggestions = ['test1', 'test2', 'test3'];
-    
-    return (
-      <div className={classes.root}>
-        <Tabs
-          orientation="vertical"
-          variant="scrollable"
-          value={value}
-          onChange={this.handleChange}
-          aria-label="Vertical tabs example"
-          className={classes.tabs}
-        >
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Design" {...a11yProps(0)} />
           <Tab label="Analysis" {...a11yProps(1)} />
           <Tab label="Construction" {...a11yProps(2)} />
         </Tabs>
-        <TabPanel value={value} index={0}>
-          <ReactAutosuggest 
-            suggestions={suggestions}
+      </AppBar>
+      <TabPanel value={value} index={0}>
+        <Grid spacing={3} alignItems="flex-start" justify="center" container ClassName={classes.grid}>
+        <Grid item xs={12}>
+          <Chart
+            chartType="ScatterChart"
+            data={[['x', 'dogs'], [0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9]]}
+            chartEvents={[
+              {
+                eventName: 'select',
+                callback: ({ chartWrapper }) => {
+                  const chart = chartWrapper.getChart()
+                  const selection = chart.getSelection()
+                  if (selection.length === 1) {
+                    const [selectedItem] = selection
+                    const dataTable = chartWrapper.getDataTable()
+                    const { row, column } = selectedItem
+                    alert(
+                      'You selected : ' +
+                        JSON.stringify({
+                          row,
+                          column,
+                          value: dataTable.getValue(row, column),
+                        }),
+                      null,
+                      2,
+                    )
+                  }
+                  console.log(selection)
+                },
+              },
+            ]}
           />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          Item Two
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          Item Three
-        </TabPanel>
-      </div>
-    );
-  }
+        </Grid>
+        <Grid item xs={12}>
+          <TagsComp />
+        </Grid>
+        </Grid>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <div style={{'height': '100px'}}>
+        Bar plot Placeholder
+        </div>
+        <ReactAutosuggest style={{'width': '100%'}} fieldSuggestions={fieldSuggestions}/>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <div style={{'height': '100px'}}>
+        Bar plot Placeholder
+        </div>
+        <ReactAutosuggest style={{'width': '100%'}} fieldSuggestions={fieldSuggestions}/>
+      </TabPanel>
+    </div>
+  );
 }
-
-export default withStyles(styles)(VerticalTabs)
