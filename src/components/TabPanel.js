@@ -102,7 +102,7 @@ export default function SimpleTabs() {
           />
         </Grid>
         <Grid item xs={12}>
-          <TagsComp />
+          <ReactAutosuggest style={{'width': '100%'}} fieldSuggestions={  fieldSuggestions}/>
         </Grid>
         </Grid>
       </TabPanel>

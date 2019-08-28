@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TabPanel from './TabPanel';
+import Chart from './Chart';
 
 
 const styles = theme => ({
@@ -62,6 +63,7 @@ class Dashboard extends Component {
                     </Grid>
                     <Grid item xs={12} md={4}>
                       Summary Placeholder
+                      <Chart />
                     </Grid>
                   </Grid>
                 </Grid>
