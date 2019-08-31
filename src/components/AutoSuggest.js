@@ -119,11 +119,15 @@ const styles = theme => ({
 })
 
 class ReactAutosuggest extends React.Component {
-  state = {
-    suggestions: [],
-    value: [],
-    textFieldInput: ''
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      suggestions: [],
+      value: [],
+      textFieldInput: ''
+    };
+  }
+
 
   handleSuggestionsFetchRequested = ({ value }) => {
     this.setState({

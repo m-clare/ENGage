@@ -51,6 +51,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const fieldSuggestions = ['test1', 'test2', 'test3']
+
 export default function SimpleTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -102,7 +103,7 @@ export default function SimpleTabs() {
           />
         </Grid>
         <Grid item xs={12}>
-          <ReactAutosuggest style={{'width': '100%'}} fieldSuggestions={  fieldSuggestions}/>
+          <ReactAutosuggest style={{'width': '100%'}} fieldSuggestions={fieldSuggestions}/>
         </Grid>
         </Grid>
       </TabPanel>
