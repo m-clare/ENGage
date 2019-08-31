@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import TabPanel from './TabPanel';
-import Chart from './Chart';
+import ReactAutosuggest from './AutoSuggest';
+import Chart from 'react-google-charts';
 
 
 const styles = theme => ({
@@ -36,9 +36,30 @@ const styles = theme => ({
   }
 });
 
+const fieldSuggestions = ['test1', 'test2', 'test3']
+
 // const tabValues = 
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sliderItems: {},
+    }
+  
+
+  this.updateSliderItems = this.updateSliderItems.bind(this);
+
+  };
+
+  updateSliderItems(key, value) {
+    this.setState ({
+      sliderItems: {
+        ...this.state.sliderItems,
+        key: value,
+      }
+    });
+  }
 
   render() {
     const { classes } = this.props;
@@ -59,7 +80,42 @@ class Dashboard extends Component {
                         </Typography>
                     </Grid>
                     <Grid item xs={12} md={8}>
-                      <TabPanel />
+                      <Grid spacing={3} alignItems="flex-start" justify="center" container ClassName={classes.grid}>
+                        <Grid item xs={12}>
+                          <Chart
+                            chartType="ScatterChart"
+                            data={[['x', 'dogs'], [0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9]]}
+                            chartEvents={[
+                              {
+                                eventName: 'select',
+                                callback: ({ chartWrapper }) => {
+                                  const chart = chartWrapper.getChart()
+                                  const selection = chart.getSelection()
+                                  if (selection.length === 1) {
+                                    const [selectedItem] = selection
+                                    const dataTable = chartWrapper.getDataTable()
+                                    const { row, column } = selectedItem
+                                    alert(
+                                      'You selected : ' +
+                                        JSON.stringify({
+                                          row,
+                                          column,
+                                          value: dataTable.getValue(row, column),
+                                        }),
+                                      null,
+                                      2,
+                                    )
+                                  }
+                                  console.log(selection)
+                                },
+                              },
+                            ]}
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <ReactAutosuggest style={{'width': '100%'}} fieldSuggestions={fieldSuggestions} sliderUpdate={this.updateSliderItems}/>
+                        </Grid>
+                      </Grid>
                     </Grid>
                     <Grid item xs={12} md={4}>
                       Summary Placeholder

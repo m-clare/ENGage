@@ -200,7 +200,7 @@ class ReactAutosuggest extends React.Component {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <Sliders chipTextBoxValue={this.state.value}/>
+          <Sliders chipTextBoxValue={this.state.value} sliderUpdate={this.props.updateSliderItems}/>
         </Grid>
       </Grid>
     )

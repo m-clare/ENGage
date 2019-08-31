@@ -29,13 +29,19 @@ const marks = [
 ];
 
 class customSlider extends Component {
+  constructor(props) {
+    super(props);
 
-  state = {
+    this.state = {
     sliderValue: 0,
-  };
+    };
+  }
+
+
 
   handleSliderChange = (event, value) => {
     this.setState({sliderValue: value, loading: false});
+    this.props.sliderUpdate(this.props.sliderTitle, value);
   }
 
   render() {
