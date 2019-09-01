@@ -3,9 +3,6 @@ import Typography from '@material-ui/core/Typography'
 import CustomSlider from './CustomSlider'
 
 class Sliders extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   createSliders = () => {
     let sliderPanel = []
@@ -13,11 +10,11 @@ class Sliders extends Component {
 
     for (let i = 0; i < sliderValue; i++) {
       sliderPanel.push(
-        <div style={{'margin-left': '2em', 'margin-right': '2em'}}>
+        <div style={{'marginLeft': '2em', 'marginRight': '2em'}} key={this.props.chipTextBoxValue[i]} >
           <Typography variant="subtitle1" gutterBottom>
             {this.props.chipTextBoxValue[i]}
           </Typography>
-          <CustomSlider sliderTitle={this.props.chipTextBoxValue[i]} sliderUpdate={this.props.sliderUpdate}/>
+          <CustomSlider sliderTitle={this.props.chipTextBoxValue[i]} updateSliderItems={this.props.updateSliderItems}/>
         </div>
       )
     }

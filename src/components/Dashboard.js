@@ -36,8 +36,6 @@ const styles = theme => ({
   }
 });
 
-const fieldSuggestions = ['test1', 'test2', 'test3']
-
 // const tabValues = 
 
 class Dashboard extends Component {
@@ -49,6 +47,7 @@ class Dashboard extends Component {
   
 
   this.updateSliderItems = this.updateSliderItems.bind(this);
+  this.removeSliderItem = this.removeSliderItem.bind(this);
 
   };
 
@@ -56,9 +55,10 @@ class Dashboard extends Component {
     this.setState ({
       sliderItems: {
         ...this.state.sliderItems,
-        key: value,
+        [key]: value,
       }
     });
+    console.log(this.state);
   }
 
   render() {
@@ -68,11 +68,11 @@ class Dashboard extends Component {
     <React.Fragment>
       <div className={classes.root}>
         <Grid container justify="center">
-          <Grid spacing={1} alignItems="flex-start" justify="center" container ClassName={classes.grid}>
+          <Grid spacing={1} alignItems="flex-start" justify="center" container className={classes.grid}>
             <Grid item xs={12} lg={11} md={11}>
               <Paper className={classes.paper}>
                 <Grid container justify="center">
-                  <Grid spacing={3} alignItems="flex-start" justify="center" container ClassName={classes.grid}>
+                  <Grid spacing={3} alignItems="flex-start" justify="center" container className={classes.grid}>
                     <Grid item xs={12}>
                       <Typography variant="h6" gutterBottom>ENGage Dashboard</Typography>
                         <Typography variant="body1">
@@ -80,7 +80,7 @@ class Dashboard extends Component {
                         </Typography>
                     </Grid>
                     <Grid item xs={12} md={8}>
-                      <Grid spacing={3} alignItems="flex-start" justify="center" container ClassName={classes.grid}>
+                      <Grid spacing={3} alignItems="flex-start" justify="center" container className={classes.grid}>
                         <Grid item xs={12}>
                           <Chart
                             chartType="ScatterChart"
@@ -113,7 +113,7 @@ class Dashboard extends Component {
                           />
                         </Grid>
                         <Grid item xs={12}>
-                          <ReactAutosuggest style={{'width': '100%'}} fieldSuggestions={fieldSuggestions} sliderUpdate={this.updateSliderItems}/>
+                          <ReactAutosuggest style={{'width': '100%'}}  updateSliderItems={this.updateSliderItems} />
                         </Grid>
                       </Grid>
                     </Grid>
