@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core/styles'
 import ChipInput from 'material-ui-chip-input'
 import Sliders from './SliderPanel'
 import Grid from '@material-ui/core/Grid'
+import ReactChart from './visualization/barPlot'
 
 const suggestions = [
   { name: 'Afghanistan' },
@@ -188,6 +189,10 @@ class ReactAutosuggest extends React.Component {
 
     return (
       <Grid spacing={3} alignItems="flex-start" justify="center" container className={classes.grid}>
+        <Grid item xs={12}>
+        Bar Placeholder
+        <ReactChart />
+        </Grid>
         <Grid item xs={12} md={6}>
           <Autosuggest
             theme={{

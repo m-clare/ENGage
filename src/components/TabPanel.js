@@ -30,7 +30,7 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  activeTab: PropTypes.any.isRequired,
+  activetab: PropTypes.any.isRequired,
 };
 
 function a11yProps(index) {
@@ -60,8 +60,8 @@ class SimpleTabs extends Component {
     }
   }
 
-  handleChange = (event, activetab)  => {
-    this.setState( (state)=> ({activetab}));  
+  handleChange = (event, value)  => {
+    this.setState({activeTab: value});  
   };
 
   render() {
@@ -71,31 +71,19 @@ class SimpleTabs extends Component {
     return (
       <div className={classes.root}>
         <AppBar position="static">
-          <Tabs activetab={activeTab} onChange={this.handleChange} aria-label="simple tabs example">
+          <Tabs value={activeTab} onChange={this.handleChange} aria-label="simple tabs example">
             <Tab label="Design" {...a11yProps(0)} />
             <Tab label="Analysis" {...a11yProps(1)} />
             <Tab label="Construction" {...a11yProps(2)} />
           </Tabs>
         </AppBar>
-        <TabPanel activetab={activeTab} index={0}>
-          <Grid spacing={3} alignItems="flex-start" justify="center" container ClassName={classes.grid}>
-          <Grid item xs={12}>
-          </Grid>
-          <Grid item xs={12}>
-            <ReactAutosuggest style={{'width':'100%'}}/>
-          </Grid>
-          </Grid>
+        <TabPanel activetab={activeTab} index={0} >
+          <ReactAutosuggest style={{'width':'100%'}}/>
         </TabPanel>
         <TabPanel activetab={activeTab} index={1}>
-          <div style={{'height': '100px'}}>
-          Bar plot Placeholder
-          </div>
           <ReactAutosuggest style={{'width':'100%'}}/>
         </TabPanel>
         <TabPanel activetab={activeTab} index={2}>
-          <div style={{'height': '100px'}}>
-          Bar plot Placeholder
-          </div>
           <ReactAutosuggest style={{'width':'100%'}}/>
         </TabPanel>
       </div>

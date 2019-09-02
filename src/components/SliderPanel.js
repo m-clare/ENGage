@@ -10,7 +10,7 @@ class Sliders extends Component {
 
     for (let i = 0; i < sliderValue; i++) {
       sliderPanel.push(
-        <div style={{'marginLeft': '2em', 'marginRight': '2em'}} key={this.props.chipTextBoxValue[i]} >
+        <div key={this.props.chipTextBoxValue[i]} >
           <Typography variant="subtitle1" gutterBottom>
             {this.props.chipTextBoxValue[i]}
           </Typography>
