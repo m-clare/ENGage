@@ -9,7 +9,9 @@ import { withStyles } from '@material-ui/core/styles'
 import ChipInput from 'material-ui-chip-input'
 import Sliders from './SliderPanel'
 import Grid from '@material-ui/core/Grid'
-import ReactChart from './visualization/barPlot'
+import BarChart from './visualization/barChart'
+import { range as d3Range } from 'd3';
+
 
 const suggestions = [
   { name: 'Afghanistan' },
@@ -21,7 +23,7 @@ function renderInput (inputProps) {
 
   return (
     <ChipInput
-      fullWidthInput='true'
+      fullWidthInput
       helperText='Input or select skill from list'
       clearInputValueOnChange
       onUpdateInput={onChange}
@@ -126,7 +128,8 @@ class ReactAutosuggest extends React.Component {
       suggestions: [],
       value: [],
       textFieldInput: '',
-      sliderItems: []
+      sliderItems: [],
+      data: d3Range(34).map(Math.random),
     };
 
   this.updateSliderItems = this.updateSliderItems.bind(this);
@@ -184,14 +187,22 @@ class ReactAutosuggest extends React.Component {
     });
   }
 
-  render () {
+  render() {
     const { classes, suggestions, ...other } = this.props
 
     return (
       <Grid spacing={3} alignItems="flex-start" justify="center" container className={classes.grid}>
         <Grid item xs={12}>
         Bar Placeholder
-        <ReactChart />
+          <svg width="100%" height="200">
+            <BarChart
+              data={this.state.data}
+              width={500}
+              height={250}
+              x={0}
+              y={0}
+            />
+          </svg>
         </Grid>
         <Grid item xs={12} md={6}>
           <Autosuggest

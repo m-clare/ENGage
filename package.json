@@ -10,6 +10,7 @@
     "@material-ui/styles": "^4.0.0",
     "@yaireo/tagify": "2.26.0",
     "autosuggest-highlight": "^3.1.1",
+    "chroma-js": "^2.0.6",
     "d3": "^5.11.0",
     "gh-pages": "^2.0.1",
     "material-ui-chip-input": "^1.0.0",
