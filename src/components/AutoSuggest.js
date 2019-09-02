@@ -20,7 +20,7 @@ function renderInput (inputProps) {
 
   return (
     <ChipInput
-      fullWidthInput
+      fullWidthInput='true'
       helperText='Input or select skill from list'
       clearInputValueOnChange
       onUpdateInput={onChange}
@@ -124,8 +124,11 @@ class ReactAutosuggest extends React.Component {
     this.state = {
       suggestions: [],
       value: [],
-      textFieldInput: ''
+      textFieldInput: '',
+      sliderItems: []
     };
+
+  this.updateSliderItems = this.updateSliderItems.bind(this);
   }
 
 
@@ -166,6 +169,16 @@ class ReactAutosuggest extends React.Component {
     });
   };
 
+  updateSliderItems(key, sliderValue) {
+    this.setState ({
+      sliderItems: {
+        ...this.state.sliderItems,
+        [key]: sliderValue,
+      }
+    });
+    console.log(this.state);
+  }
+
   render () {
     const { classes, suggestions, ...other } = this.props
 
@@ -200,7 +213,7 @@ class ReactAutosuggest extends React.Component {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <Sliders chipTextBoxValue={this.state.value} updateSliderItems={this.props.updateSliderItems}/>
+          <Sliders chipTextBoxValue={this.state.value} updateSliderItems={this.updateSliderItems}/>
         </Grid>
       </Grid>
     )

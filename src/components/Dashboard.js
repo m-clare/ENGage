@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import ReactAutosuggest from './AutoSuggest';
 import Chart from 'react-google-charts';
+import SimpleTabs from './TabPanel'
 
 
 const styles = theme => ({
@@ -39,27 +39,6 @@ const styles = theme => ({
 // const tabValues = 
 
 class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sliderItems: {},
-    }
-  
-
-  this.updateSliderItems = this.updateSliderItems.bind(this);
-  this.removeSliderItem = this.removeSliderItem.bind(this);
-
-  };
-
-  updateSliderItems(key, value) {
-    this.setState ({
-      sliderItems: {
-        ...this.state.sliderItems,
-        [key]: value,
-      }
-    });
-    console.log(this.state);
-  }
 
   render() {
     const { classes } = this.props;
@@ -80,42 +59,7 @@ class Dashboard extends Component {
                         </Typography>
                     </Grid>
                     <Grid item xs={12} md={8}>
-                      <Grid spacing={3} alignItems="flex-start" justify="center" container className={classes.grid}>
-                        <Grid item xs={12}>
-                          <Chart
-                            chartType="ScatterChart"
-                            data={[['x', 'dogs'], [0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9]]}
-                            chartEvents={[
-                              {
-                                eventName: 'select',
-                                callback: ({ chartWrapper }) => {
-                                  const chart = chartWrapper.getChart()
-                                  const selection = chart.getSelection()
-                                  if (selection.length === 1) {
-                                    const [selectedItem] = selection
-                                    const dataTable = chartWrapper.getDataTable()
-                                    const { row, column } = selectedItem
-                                    alert(
-                                      'You selected : ' +
-                                        JSON.stringify({
-                                          row,
-                                          column,
-                                          value: dataTable.getValue(row, column),
-                                        }),
-                                      null,
-                                      2,
-                                    )
-                                  }
-                                  console.log(selection)
-                                },
-                              },
-                            ]}
-                          />
-                        </Grid>
-                        <Grid item xs={12}>
-                          <ReactAutosuggest style={{'width': '100%'}}  updateSliderItems={this.updateSliderItems} />
-                        </Grid>
-                      </Grid>
+                    <SimpleTabs />
                     </Grid>
                     <Grid item xs={12} md={4}>
                       Summary Placeholder
