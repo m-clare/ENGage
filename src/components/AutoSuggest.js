@@ -125,7 +125,7 @@ class ReactAutosuggest extends React.Component {
       suggestions: [],
       value: [],
       textFieldInput: '',
-      sliderItems: []
+      sliderItems: {}
     };
 
   this.updateSliderItems = this.updateSliderItems.bind(this);
@@ -160,16 +160,19 @@ class ReactAutosuggest extends React.Component {
   }
 
   handleDeleteChip (chip, index) {
-    this.setState(({ value }) => {
-      const temp = value.slice()
-      temp.splice(index, 1)
+    this.setState(({ value, sliderItems }) => {
+      const temp = value.slice();
+      const key = value[index];
+      const { [key]: sliderValue, ...withoutKey } = sliderItems;
+      temp.splice(index, 1);
       return {
-        value: temp
+        value: temp,
+        sliderItems: withoutKey
       }
     });
   };
 
-  updateSliderItems(key, sliderValue) {
+  updateSliderItems (key, sliderValue) {
     this.setState ({
       sliderItems: {
         ...this.state.sliderItems,
