@@ -125,7 +125,7 @@ class ReactAutosuggest extends React.Component {
       suggestions: [],
       value: [],
       textFieldInput: '',
-      sliderItems: {}
+      sliderItems: []
     };
 
   this.updateSliderItems = this.updateSliderItems.bind(this);
@@ -152,9 +152,10 @@ class ReactAutosuggest extends React.Component {
 
   handleAddChip (chip) {
     if (this.props.allowDuplicates || this.state.value.indexOf(chip) < 0) {
-      this.setState(({ value }) => ({
+      this.setState(({ value, sliderItems }) => ({
         value: [...value, chip],
-        textFieldInput: ''
+        textFieldInput: '',
+        sliderItems: [...sliderItems, {'key': chip, 'sliderValue': 0}]
       }))
     }
   }
@@ -162,24 +163,24 @@ class ReactAutosuggest extends React.Component {
   handleDeleteChip (chip, index) {
     this.setState(({ value, sliderItems }) => {
       const temp = value.slice();
-      const key = value[index];
-      const { [key]: sliderValue, ...withoutKey } = sliderItems;
+      let filteredSliders = sliderItems.filter(function(filteredItems) {
+        return filteredItems.key !== value[index];
+      });
       temp.splice(index, 1);
       return {
         value: temp,
-        sliderItems: withoutKey
+        sliderItems: filteredSliders
       }
     });
   };
 
-  updateSliderItems (key, sliderValue) {
+
+  updateSliderItems (sliderObject) {
+    let key = sliderObject.key;
+    let sliderValue = sliderObject.sliderValue;
     this.setState ({
-      sliderItems: {
-        ...this.state.sliderItems,
-        [key]: sliderValue,
-      }
+      sliderItems: this.state.sliderItems.map(el => el.key === key ? Object.assign({}, el, { sliderValue }) : el)
     });
-    console.log(this.state);
   }
 
   render () {

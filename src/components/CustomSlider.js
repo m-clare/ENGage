@@ -41,7 +41,7 @@ class customSlider extends Component {
 
   handleSliderChange = (event, value) => {
     this.setState({sliderValue: value, loading: false});
-    this.props.updateSliderItems(this.props.sliderTitle, value);
+    this.props.updateSliderItems({key: this.props.sliderTitle, sliderValue: value});
   }
 
   render() {
