@@ -33,6 +33,7 @@ class BarChart extends React.Component {
         .domain([0, 5])
         .range([0, this.props.height])
 
+    console.log(heightScale(2) / this.props.height)
     return (
       <g
         transform={`translate(${x}, ${y})`}
@@ -45,7 +46,7 @@ class BarChart extends React.Component {
             width={widthScale.bandwidth()}
             height={heightScale(d.sliderValue)}
             style={{
-              fill: i === highlightedBar ? this.color(d.sliderValue) : this.color(1 - d.sliderValue)
+              fill: i === highlightedBar ? this.color(heightScale(d.sliderValue)/this.props.height) : this.color(1 - heightScale(d.sliderValue/this.props.height))
             }}
             onMouseOver={() => highlightBar(i)}
             key={i}
