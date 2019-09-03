@@ -129,7 +129,11 @@ class ReactAutosuggest extends React.Component {
       value: [],
       textFieldInput: '',
       sliderItems: [],
-      data: d3Range(34).map(Math.random),
+      data : [{'key': 'test', 'sliderValue': 5},
+              {'key': 'test2', 'sliderValue': 4},
+              {'key': 'test3', 'sliderValue': 1}],
+      // data: d3Range(34).map(Math.random),
+      currentIndex: null,
     };
 
   this.updateSliderItems = this.updateSliderItems.bind(this);
@@ -187,6 +191,11 @@ class ReactAutosuggest extends React.Component {
     });
   }
 
+  setCurrentIndex = currentIndex =>
+    this.setState({
+      currentIndex
+    });
+
   render() {
     const { classes, suggestions, ...other } = this.props
 
@@ -194,13 +203,15 @@ class ReactAutosuggest extends React.Component {
       <Grid spacing={3} alignItems="flex-start" justify="center" container className={classes.grid}>
         <Grid item xs={12}>
         Bar Placeholder
-          <svg width="100%" height="200">
+          <svg width="100%">
             <BarChart
               data={this.state.data}
               width={500}
-              height={250}
+              height={'150px'}
               x={0}
               y={0}
+              highlightBar={this.setCurrentIndex}
+              highlightedBar={this.state.currentIndex}
             />
           </svg>
         </Grid>

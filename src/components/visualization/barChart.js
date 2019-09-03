@@ -1,18 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 import * as d3 from "d3";
 import chroma from "chroma-js";
 
-class BarChart extends Component {
-	state = {
-		widthScale: d3
-  		.scaleBand()
-  		.domain(d3.range(0, this.props.data.length))
-  		.range([0, this.props.width]),
-		heightScale: d3
-    .scaleLinear()
-    .domain([0, d3.max(this.props.data)])
-    .range([0, this.props.height])
-	};
+class BarChart extends React.Component {
+  state = {
+    widthScale: d3
+      .scaleBand()
+      .domain(this.props.data.map((d) => d.key))
+      .range([0, this.props.width]),
+
+    heightScale: d3
+      .scaleLinear()
+      .domain([0, d3.max(this.props.data.map((d) => d.sliderValue))])
+      .range([0, this.props.height])
+  };
 
   color = chroma.scale(["yellow", "navy"]).mode("hsl");
 
@@ -27,20 +28,27 @@ class BarChart extends Component {
   }
 
   render() {
-    const { x, y, data, height} = this.props,
-    { widthScale, heightScale } = this.state;
+    const { x, y, data, width, height, heightScale, highlightBar, highlightedBar } = this.props,
+      { widthScale } = this.state;
+
+      console.log(typeof(d3.max(data.map((d) => d.sliderValue))))
+      console.log(typeof(this.props.height))
 
     return (
-      <g>
+      <g
+        transform={`translate(${x}, ${y})`}
+        onMouseOut={() => highlightBar(null)}
+      >
         {data.map((d, i) => (
           <rect
             x={widthScale(i)}
-            y={height - heightScale(d)}
+            y={height - 200}
             width={widthScale.bandwidth()}
-            height={heightScale(d)}
+            height={200}
             style={{
-              fill: this.color(1 - d)
+              fill: i === highlightedBar ? this.color(d) : this.color(1 - d)
             }}
+            onMouseOver={() => highlightBar(i)}
             key={i}
           />
         ))}
