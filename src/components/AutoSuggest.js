@@ -129,10 +129,6 @@ class ReactAutosuggest extends React.Component {
       value: [],
       textFieldInput: '',
       sliderItems: [],
-      data : [{'key': 'test', 'sliderValue': 5},
-              {'key': 'test2', 'sliderValue': 4},
-              {'key': 'test3', 'sliderValue': 1}],
-      // data: d3Range(34).map(Math.random),
       currentIndex: null,
     };
 
@@ -202,12 +198,11 @@ class ReactAutosuggest extends React.Component {
     return (
       <Grid spacing={3} alignItems="flex-start" justify="center" container className={classes.grid}>
         <Grid item xs={12}>
-        Bar Placeholder
-          <svg width="100%">
+          <svg width="100%" height={150}> // Why does the height of the SVG not match the BarChart?
             <BarChart
-              data={this.state.data}
+              data={this.state.sliderItems}
               width={500}
-              height={'150px'}
+              height={150}
               x={0}
               y={0}
               highlightBar={this.setCurrentIndex}

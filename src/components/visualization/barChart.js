@@ -6,13 +6,11 @@ class BarChart extends React.Component {
   state = {
     widthScale: d3
       .scaleBand()
+      .padding(0.1)
+      // .domain(d3.range(0, this.props.data.length))
       .domain(this.props.data.map((d) => d.key))
       .range([0, this.props.width]),
 
-    heightScale: d3
-      .scaleLinear()
-      .domain([0, d3.max(this.props.data.map((d) => d.sliderValue))])
-      .range([0, this.props.height])
   };
 
   color = chroma.scale(["yellow", "navy"]).mode("hsl");
@@ -21,18 +19,19 @@ class BarChart extends React.Component {
     let { widthScale, heightScale } = prevState;
 
     widthScale.domain(d3.range(0, nextProps.data.length));
-    heightScale.domain([0, d3.max(nextProps.data)]);
 
-    prevState = { ...prevState, widthScale, heightScale };
+    prevState = { ...prevState, widthScale };
     return prevState;
   }
 
   render() {
-    const { x, y, data, width, height, heightScale, highlightBar, highlightedBar } = this.props,
+    const { x, y, data, width, height, highlightBar, highlightedBar } = this.props,
       { widthScale } = this.state;
 
-      console.log(typeof(d3.max(data.map((d) => d.sliderValue))))
-      console.log(typeof(this.props.height))
+    const heightScale = d3
+        .scaleLinear()
+        .domain([0, 5])
+        .range([0, this.props.height])
 
     return (
       <g
@@ -42,11 +41,11 @@ class BarChart extends React.Component {
         {data.map((d, i) => (
           <rect
             x={widthScale(i)}
-            y={height - 200}
+            y={height - heightScale(d.sliderValue)}
             width={widthScale.bandwidth()}
-            height={200}
+            height={heightScale(d.sliderValue)}
             style={{
-              fill: i === highlightedBar ? this.color(d) : this.color(1 - d)
+              fill: i === highlightedBar ? this.color(d.sliderValue) : this.color(1 - d.sliderValue)
             }}
             onMouseOver={() => highlightBar(i)}
             key={i}
