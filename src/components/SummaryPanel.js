@@ -4,7 +4,8 @@ import AppBar from '@material-ui/core/AppBar';
 import RangeSlider from './CompoundSlider'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab';
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles';
+import DotBarChart from './visualization/dotBarChart';
 
 
 const styles = theme => ({
@@ -21,27 +22,18 @@ const styles = theme => ({
 class SummaryPanel extends React.Component {
 
 	render() {
-  
-  // const data = [1, 5, 3]
-    const numPerRow = 15;
-
-
-  var array1 = [1, 2, 3, 4]
-  function setTest(d) { return d3.range(d); };
-  // let test = function(d, i, j) {
-  function setTest2(d, i, j) { return (setTest(d), i, j); };
-
-  console.log(setTest2(array1))
-
-
 
     return (
       <div>
+      <div>
       <AppBar position="static">
-        <div>
-        Summary
-        </div>
       </AppBar>
+      </div>
+      <div>
+      <svg width="100%" height={200}> 
+      <DotBarChart dotSize={10}/>
+      </svg>
+      </div>
       </div>
       )
 	 }

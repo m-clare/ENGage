@@ -63,7 +63,6 @@ class Dashboard extends Component {
                     <SimpleTabs />
                     </Grid>
                     <Grid item xs={12} md={4}>
-                      Summary Placeholder
                       <SummaryPanel />
                     </Grid>
                   </Grid>

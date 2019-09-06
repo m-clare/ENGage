@@ -1,31 +1,57 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import * as d3 from 'd3';
 
 class DotBarChart extends React.Component {
+
 	render() {
 
-		const {x, y, width, height } = this.props
+    const { dotSize } = this.props
+    const data = [5, 3, 2, 4, 5, 6, 2, 1]
+		const width = data.length * 2 * dotSize + (data.length) * dotSize;
+    const height = d3.max(data) * 2 * dotSize + (data.length) * dotSize;
 
-    const data = [1, 5, 3]
-    const numPerRow = 15;
+    const x = d3.scaleLinear()
+      .domain([0, data.length])
+      .range([0, width])
+
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data) + 1])
+      .range([height, 0])
 
 
-    var array1 = [1, 2, 3, 4]
-    let data = function(d) { return d3.range(d); };
 
-    console.log(data);
-
-    function setTest(d) { return d3.range(d); };
-    // let test = function(d, i, j) {
-    console.log(setTest(data))
-    //   return ((i + d3.sum(data.slice(0, j))) % numPerRow + 1) * 15;
-    // };
-    // console.log(test);
-    // // const test = data.map((d, i, j) => (i + d3.sum(d.slice(0,j)) % numPerRow + 1) * 15)
-
-    // console.log(test)
-    return null
+      return (
+        <svg x="50%" overflow="visible">
+          <g
+            transform={`translate(${-width*0.5}, 0)`}
+            >
+            {data.map((d, i) => ( 
+                <g
+                  transform={`translate(${x(i)}, 0)`}
+                  key={i}
+                >
+                column = d3.range(d)
+                column.map((d) => (
+                  <circle
+                    cx={0}
+                    cy={y(d)}
+                    r={dotSize}
+                  />
+                  {console.log(d3.range(d))}
+                  ))
+                </g>
+              )
+            )
+          }
+          </g>
+        </svg>
+        )
 	}
+}
+
+DotBarChart.propTypes = {
+  dotSize: PropTypes.number
 }
 
 export default DotBarChart
