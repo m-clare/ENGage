@@ -9,8 +9,7 @@ import { withStyles } from '@material-ui/core/styles'
 import ChipInput from 'material-ui-chip-input'
 import Sliders from './SliderPanel'
 import Grid from '@material-ui/core/Grid'
-import BarChart from './visualization/barChart'
-import { range as d3Range } from 'd3';
+import DotBarChart from './visualization/dotBarChart';
 
 
 const suggestions = [
@@ -198,16 +197,8 @@ class ReactAutosuggest extends React.Component {
     return (
       <Grid spacing={3} alignItems="flex-start" justify="center" container className={classes.grid}>
         <Grid item xs={12}>
-          <svg width="100%" height={150}> // Why does the height of the SVG not match the BarChart?
-            <BarChart
-              data={this.state.sliderItems}
-              width={500}
-              height={150}
-              x={0}
-              y={0}
-              highlightBar={this.setCurrentIndex}
-              highlightedBar={this.state.currentIndex}
-            />
+          <svg width="100%" height={200}> 
+          <DotBarChart dotSize={10} data={this.state.sliderItems}/>
           </svg>
         </Grid>
         <Grid item xs={12} md={6}>

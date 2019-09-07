@@ -6,47 +6,54 @@ class DotBarChart extends React.Component {
 
 	render() {
 
-    const { dotSize } = this.props
-    const data = [5, 3, 2, 4, 5, 6, 2, 1]
-		const width = data.length * 2 * dotSize + (data.length) * dotSize;
-    const height = d3.max(data) * 2 * dotSize + (data.length) * dotSize;
+    const { dotSize, data } = this.props
+    const data2 = data.map(d => d.sliderValue)
+    const width = data.length * 2 * dotSize + (data.length) * dotSize;
+    const height = 5 * 2 * dotSize + 5 * dotSize;
+
 
     const x = d3.scaleLinear()
       .domain([0, data.length])
       .range([0, width])
 
     const y = d3.scaleLinear()
-      .domain([0, d3.max(data) + 1])
+      .domain([0, 6])
       .range([height, 0])
 
+    const newData = data2.map(function(el) {
+        return d3.range(el);
+      })
 
-
-      return (
-        <svg x="50%" overflow="visible">
-          <g
-            transform={`translate(${-width*0.5}, 0)`}
-            >
-            {data.map((d, i) => ( 
-                <g
-                  transform={`translate(${x(i)}, 0)`}
-                  key={i}
-                >
-                column = d3.range(d)
-                column.map((d) => (
+    if(!data)
+    {
+      return null;
+    }
+    return (
+      <svg x="50%" overflow="visible">
+        <g
+          transform={`translate(${-width*0.5}, ${-dotSize})`}
+          >
+          {newData.map((column, index) => ( 
+              <g
+                transform={`translate(${x(index)}, 0)`}
+                key={index}
+              >
+                {column.map((circleNumber) => (
                   <circle
                     cx={0}
-                    cy={y(d)}
+                    cy={y(circleNumber)}
                     r={dotSize}
+                    key={circleNumber}
                   />
-                  {console.log(d3.range(d))}
                   ))
-                </g>
+                }
+              </g>
               )
             )
           }
-          </g>
-        </svg>
-        )
+        </g>
+      </svg>
+      )
 	}
 }
 

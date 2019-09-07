@@ -1,12 +1,7 @@
 import React from 'react'
-import * as d3 from "d3";
 import AppBar from '@material-ui/core/AppBar';
 import RangeSlider from './CompoundSlider'
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab';
 import { withStyles } from '@material-ui/core/styles';
-import DotBarChart from './visualization/dotBarChart';
-
 
 const styles = theme => ({
   root: {
@@ -30,9 +25,6 @@ class SummaryPanel extends React.Component {
       </AppBar>
       </div>
       <div>
-      <svg width="100%" height={200}> 
-      <DotBarChart dotSize={10}/>
-      </svg>
       </div>
       </div>
       )

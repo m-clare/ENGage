@@ -7,8 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ReactAutosuggest from './AutoSuggest';
-import Chart from 'react-google-charts';
-import Grid from '@material-ui/core/Grid';
+
 
 function TabPanel(props) {
   const { children, activetab, index, ...other } = props;
@@ -44,7 +43,7 @@ const styles = theme => ({
     root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
-    'max-height': '800px',
+    // 'max-height': '800px',
     'overflow': 'hidden'
   },
 });
