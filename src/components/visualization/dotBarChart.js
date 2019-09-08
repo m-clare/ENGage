@@ -1,8 +1,11 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import * as d3 from 'd3';
+import chroma from "chroma-js"
 
 class DotBarChart extends React.Component {
+
+  color = chroma.scale(["#B6002A", "#0E3B43", "#357266", "#A3BBAD"]).mode("lch")
 
 	render() {
 
@@ -44,6 +47,7 @@ class DotBarChart extends React.Component {
                     cy={y(circleNumber)}
                     r={dotSize}
                     key={circleNumber}
+                    fill={this.color( index / 30)}
                   />
                   ))
                 }

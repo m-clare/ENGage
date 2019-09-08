@@ -7,10 +7,10 @@ import Routes from './routes';
 const theme = createMuiTheme({
   palette: {
     secondary: {
-      main: '#357266'
+      main: "#FFFFFF"
     },
     primary: {
-      main: '#0E3B43'
+      main: "#0E3B43"
     }
   },
   typography: {
