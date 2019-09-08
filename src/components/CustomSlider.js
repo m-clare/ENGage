@@ -48,14 +48,6 @@ class customSlider extends Component {
     const { sliderValue } = this.state;
     const color = this.props.color;
 
-    const style = {
-      thumb: {
-        backgroundColor: '#FFFFFF'
-      }
-    }
-    console.log(color)
-
-
   return (
     <Slider
       value={sliderValue}
@@ -64,7 +56,7 @@ class customSlider extends Component {
       step={null}
       marks={marks}
       onChange={this.handleSliderChange}
-      style={{'root': {'color': '#000000'}}}
+      style={{'backgroundColor': {color}}}
     />
     )
   }

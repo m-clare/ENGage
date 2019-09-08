@@ -7,6 +7,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ReactAutosuggest from './AutoSuggest';
+import SummaryPanel from './SummaryPanel';
+import Grid from '@material-ui/core/Grid';
 
 
 function TabPanel(props) {
@@ -76,15 +78,20 @@ class SimpleTabs extends Component {
             <Tab label="Construction" {...a11yProps(2)} />
           </Tabs>
         </AppBar>
-        <TabPanel activetab={activeTab} index={0} >
-          <ReactAutosuggest style={{'width':'100%'}}/>
-        </TabPanel>
-        <TabPanel activetab={activeTab} index={1}>
-          <ReactAutosuggest style={{'width':'100%'}}/>
-        </TabPanel>
-        <TabPanel activetab={activeTab} index={2}>
-          <ReactAutosuggest style={{'width':'100%'}}/>
-        </TabPanel>
+        <Grid item xs={12} md={8}>
+          <TabPanel activetab={activeTab} index={0} >
+            <ReactAutosuggest style={{'width':'100%'}}/>
+          </TabPanel>
+          <TabPanel activetab={activeTab} index={1}>
+            <ReactAutosuggest style={{'width':'100%'}}/>
+          </TabPanel>
+          <TabPanel activetab={activeTab} index={2}>
+            <ReactAutosuggest style={{'width':'100%'}}/>
+          </TabPanel>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <SummaryPanel />
+        </Grid>
       </div>
     );
   }

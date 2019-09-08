@@ -1,7 +1,7 @@
 import React from 'react'
-import AppBar from '@material-ui/core/AppBar';
 import RangeSlider from './CompoundSlider'
 import { withStyles } from '@material-ui/core/styles';
+import UsersByDevice from './visualization/donutChart';
 
 const styles = theme => ({
   root: {
@@ -20,12 +20,7 @@ class SummaryPanel extends React.Component {
 
     return (
       <div>
-      <div>
-      <AppBar position="static">
-      </AppBar>
-      </div>
-      <div>
-      </div>
+        <UsersByDevice />
       </div>
       )
 	 }
