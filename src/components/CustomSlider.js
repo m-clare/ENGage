@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Slider from '@material-ui/core/Slider';
+import { makeStyles } from '@material-ui/core/styles';
+
 
 const marks = [
   {
@@ -44,16 +46,29 @@ class customSlider extends Component {
 
   render() {
     const { sliderValue } = this.state;
+    const color = this.props.color;
 
-  return <Slider
-          value={sliderValue}
-          min={0}
-          max={5}
-          step={null}
-          marks={marks}
-          onChange={this.handleSliderChange}
-            />
+    const style = {
+      thumb: {
+        backgroundColor: '#FFFFFF'
+      }
+    }
+    console.log(color)
+
+
+  return (
+    <Slider
+      value={sliderValue}
+      min={0}
+      max={5}
+      step={null}
+      marks={marks}
+      onChange={this.handleSliderChange}
+      style={{'root': {'color': '#000000'}}}
+    />
+    )
   }
 }
+
 
 export default customSlider

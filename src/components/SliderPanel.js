@@ -18,8 +18,7 @@ class Sliders extends Component {
             {this.props.chipTextBoxValue[i]}
           </Typography>
           <CustomSlider sliderTitle={this.props.chipTextBoxValue[i]} updateSliderItems={this.props.updateSliderItems}
-             style={{'selectionColor': "#FFFFFF",
-                     'handleFillColor': "#008080"}}/>
+             color='#FFFFFF'/>
         </div>
       )
     }
