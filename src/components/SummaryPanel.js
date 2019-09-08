@@ -3,17 +3,6 @@ import RangeSlider from './CompoundSlider'
 import { withStyles } from '@material-ui/core/styles';
 import UsersByDevice from './visualization/donutChart';
 
-const styles = theme => ({
-  root: {
-    overflow: 'hidden',
-    minHeight: 48,
-    display: 'flex',
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-
-})
-
 class SummaryPanel extends React.Component {
 
 	render() {
@@ -26,4 +15,4 @@ class SummaryPanel extends React.Component {
 	 }
 }
 
-export default withStyles(styles)(SummaryPanel)
+export default SummaryPanel

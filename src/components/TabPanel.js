@@ -78,19 +78,23 @@ class SimpleTabs extends Component {
             <Tab label="Construction" {...a11yProps(2)} />
           </Tabs>
         </AppBar>
-        <Grid item xs={12} md={8}>
-          <TabPanel activetab={activeTab} index={0} >
-            <ReactAutosuggest style={{'width':'100%'}}/>
-          </TabPanel>
-          <TabPanel activetab={activeTab} index={1}>
-            <ReactAutosuggest style={{'width':'100%'}}/>
-          </TabPanel>
-          <TabPanel activetab={activeTab} index={2}>
-            <ReactAutosuggest style={{'width':'100%'}}/>
-          </TabPanel>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <SummaryPanel />
+        <Grid container justify="center">
+          <Grid spacing={3} alignItems="flex-start" justify="center" container className={classes.grid}>
+            <Grid item xs={12} md={8}>
+              <TabPanel activetab={activeTab} index={0} >
+                <ReactAutosuggest style={{'width':'100%'}}/>
+              </TabPanel>
+              <TabPanel activetab={activeTab} index={1}>
+                <ReactAutosuggest style={{'width':'100%'}}/>
+              </TabPanel>
+              <TabPanel activetab={activeTab} index={2}>
+                <ReactAutosuggest style={{'width':'100%'}}/>
+              </TabPanel>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <SummaryPanel />
+            </Grid>
+          </Grid>
         </Grid>
       </div>
     );
