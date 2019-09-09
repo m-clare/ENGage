@@ -2,15 +2,16 @@ import React from 'react'
 import RangeSlider from './CompoundSlider'
 import { withStyles } from '@material-ui/core/styles';
 import UsersByDevice from './visualization/donutChart';
+import Grid from '@material-ui/core/Grid';
 
 class SummaryPanel extends React.Component {
 
 	render() {
 
     return (
-      <div>
+    	<Grid container justify="center">
         <UsersByDevice />
-      </div>
+        </Grid>
       )
 	 }
 }

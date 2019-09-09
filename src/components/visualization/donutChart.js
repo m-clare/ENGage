@@ -1,20 +1,8 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import PropTypes from 'prop-types';
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  IconButton,
-  Divider,
-  Typography
-} from '@material-ui/core';
-import LaptopMacIcon from '@material-ui/icons/LaptopMac';
-import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import TabletMacIcon from '@material-ui/icons/TabletMac';
+import { Divider } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,24 +10,13 @@ const useStyles = makeStyles(theme => ({
   },
   chartContainer: {
     position: 'relative',
-    height: '300px'
+    height: '250px',
+    padding: theme.spacing(3)
   },
-  stats: {
-    marginTop: theme.spacing(2),
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  device: {
-    textAlign: 'center',
-    padding: theme.spacing(1)
-  },
-  deviceIcon: {
-    color: theme.palette.icon
-  }
 }));
 
 const UsersByDevice = props => {
-  const { className, ...rest } = props;
+  const { className } = props;
 
   const classes = useStyles();
   const theme = useTheme();
@@ -47,18 +24,19 @@ const UsersByDevice = props => {
   const data = {
     datasets: [
       {
-        data: [63, 15, 22],
+        data: [25, 25, 25, 25],
         backgroundColor: [
-          theme.palette.primary.main,
-          theme.palette.error.main,
-          theme.palette.secondary.main,
+          "#B6002A",
+          "#0E3B43", 
+          "#357266", 
+          "#A3BBAD",
         ],
         borderWidth: 8,
         borderColor: theme.palette.white,
         hoverBorderColor: theme.palette.white
       }
     ],
-    labels: ['Desktop', 'Tablet', 'Mobile']
+    labels: ['Schematic Design', 'Detailed Design', 'Construction Documents', 'Contract Administration']
   };
 
   const options = {
@@ -83,51 +61,13 @@ const UsersByDevice = props => {
     }
   };
 
-  const devices = [
-    {
-      title: 'Desktop',
-      value: '63',
-      icon: <LaptopMacIcon />,
-      color: theme.palette.primary.main
-    },
-    {
-      title: 'Tablet',
-      value: '15',
-      icon: <TabletMacIcon />,
-      color: theme.palette.error.main
-    },
-    {
-      title: 'Mobile',
-      value: '23',
-      icon: <PhoneIphoneIcon />,
-      color: theme.palette.secondary.main
-    }
-  ];
   return (
-    <div>
+    
     <div className={classes.chartContainer}>
       <Doughnut
         data={data}
         options={options}
       />
-    </div>
-    <div className={classes.stats}>
-      {devices.map(device => (
-        <div
-          className={classes.device}
-          key={device.title}
-        >
-          <span className={classes.deviceIcon}>{device.icon}</span>
-          <Typography variant="body1">{device.title}</Typography>
-          <Typography
-            style={{ color: device.color }}
-            variant="h2"
-          >
-            {device.value}%
-          </Typography>
-        </div>
-      ))}
-    </div>
     </div>
   );
 };

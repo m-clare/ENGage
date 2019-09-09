@@ -50,8 +50,6 @@ const styles = theme => ({
   },
 });
 
-const fieldSuggestions = ['test1', 'test2', 'test3']
-
 class SimpleTabs extends Component {
 
   constructor(props) {
@@ -71,16 +69,18 @@ class SimpleTabs extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
-          <Tabs value={activeTab} onChange={this.handleChange} aria-label="simple tabs example">
-            <Tab label="Design" {...a11yProps(0)} />
-            <Tab label="Analysis" {...a11yProps(1)} />
-            <Tab label="Construction" {...a11yProps(2)} />
-          </Tabs>
-        </AppBar>
         <Grid container justify="center">
-          <Grid spacing={3} alignItems="flex-start" justify="center" container className={classes.grid}>
-            <Grid item xs={12} md={8}>
+          <Grid spacing={0} alignItems="flex-start" justify="center" container className={classes.grid}>
+            <Grid item xs={12} md={8} style={{borderRight: '0.001em solid #e0e0e0'}}>
+              <AppBar position="static" style={{boxShadow: "none"}}>
+                <Grid item xs={12}>
+                  <Tabs value={activeTab} onChange={this.handleChange}>
+                    <Tab label="Design" {...a11yProps(0)} />
+                    <Tab label="Analysis" {...a11yProps(1)} />
+                    <Tab label="Construction" {...a11yProps(2)} />
+                  </Tabs>
+                </Grid>
+              </AppBar>
               <TabPanel activetab={activeTab} index={0} >
                 <ReactAutosuggest style={{'width':'100%'}}/>
               </TabPanel>
@@ -92,6 +92,11 @@ class SimpleTabs extends Component {
               </TabPanel>
             </Grid>
             <Grid item xs={12} md={4}>
+              <AppBar position="static" style={{boxShadow: "none"}}>
+                <Grid item xs={12} md={4}>
+                  <Tab label="Summary" disabled={true}/>
+                </Grid>
+              </AppBar>
               <SummaryPanel />
             </Grid>
           </Grid>

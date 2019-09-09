@@ -56,7 +56,7 @@ class customSlider extends Component {
       step={null}
       marks={marks}
       onChange={this.handleSliderChange}
-      style={{'backgroundColor': {color}}}
+      style={{MuiSliderThumb: {backgroundColor: {color}}}}
     />
     )
   }

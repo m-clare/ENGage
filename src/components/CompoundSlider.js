@@ -1,39 +1,88 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
+import React from "react";
+import { Slider, Rail, Handles, Tracks, Ticks } from "react-compound-slider";
+import { MuiRail, MuiHandle, MuiTrack, MuiTick } from "./helpers/components"; 
 
-const useStyles = makeStyles({
-  root: {
-    width: 300,
-  },
-});
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-function valuetext(value) {
-  return `${value}°C`;
-}
+    const initialValues = [3, 6, 9, 12];
 
-export default function RangeSlider() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState([20, 37, 40]);
+    this.state = {
+      domain: [0, 12],
+      values: [...initialValues],
+      update: [...initialValues]
+    };
+  }
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  onUpdate = update => {
+    this.setState({ update });
   };
 
-  return (
-    <div className={classes.root}>
-      <Typography id="range-slider" gutterBottom>
-        Temperature range
-      </Typography>
-      <Slider
-        value={value}
-        onChange={handleChange}
-        valueLabelDisplay="auto"
-        aria-labelledby="range-slider"
-        getAriaValueText={valuetext}
-        constrainThumbs='true'
-      />
-    </div>
-  );
+  onChange = values => {
+    this.setState({ values });
+  };
+
+  render() {
+    const { domain, values, update } = this.state;
+
+    return (
+          <div style={{ margin: "10%", height: 120, width: "80%" }}>
+            <Slider
+              mode={2}
+              step={0.5}
+              domain={domain}
+              rootStyle={{
+                position: "relative",
+                width: "100%"
+              }}
+              onUpdate={this.onUpdate}
+              onChange={this.onChange}
+              values={values}
+            >
+              <Rail>
+                {({ getRailProps }) => <MuiRail getRailProps={getRailProps} />}
+              </Rail>
+              <Handles>
+                {({ handles, getHandleProps }) => (
+                  <div className="slider-handles">
+                    {handles.map(handle => (
+                      <MuiHandle
+                        key={handle.id}
+                        handle={handle}
+                        domain={domain}
+                        getHandleProps={getHandleProps}
+                      />
+                    ))}
+                  </div>
+                )}
+              </Handles>
+              <Tracks left={false} right={false}>
+                {({ tracks, getTrackProps }) => (
+                  <div className="slider-tracks">
+                    {tracks.map(({ id, source, target }) => (
+                      <MuiTrack
+                        key={id}
+                        source={source}
+                        target={target}
+                        getTrackProps={getTrackProps}
+                      />
+                    ))}
+                  </div>
+                )}
+              </Tracks>
+              <Ticks count={5}>
+                {({ ticks }) => (
+                  <div className="slider-ticks">
+                    {ticks.map(tick => (
+                      <MuiTick key={tick.id} tick={tick} count={ticks.length} />
+                    ))}
+                  </div>
+                )}
+              </Ticks>
+            </Slider>
+          </div>
+    );
+  }
 }
+
