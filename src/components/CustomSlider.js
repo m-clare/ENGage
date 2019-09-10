@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Slider from '@material-ui/core/Slider';
-import { makeStyles } from '@material-ui/core/styles';
-
+import chroma from "chroma-js"
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 const marks = [
   {
@@ -46,7 +46,7 @@ class customSlider extends Component {
 
   render() {
     const { sliderValue } = this.state;
-    const color = this.props.color;
+    const { color } = this.props
 
   return (
     <Slider
@@ -56,7 +56,7 @@ class customSlider extends Component {
       step={null}
       marks={marks}
       onChange={this.handleSliderChange}
-      style={{MuiSliderThumb: {backgroundColor: {color}}}}
+      style={{color: color }}
     />
     )
   }

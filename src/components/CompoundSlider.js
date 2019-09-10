@@ -1,12 +1,12 @@
-import React from "react";
+import React, { Component } from "react";
 import { Slider, Rail, Handles, Tracks, Ticks } from "react-compound-slider";
 import { MuiRail, MuiHandle, MuiTrack, MuiTick } from "./helpers/components"; 
 
-class App extends React.Component {
+class CompoundSlider extends Component {
   constructor(props) {
     super(props);
 
-    const initialValues = [3, 6, 9, 12];
+    const initialValues = [0, 3, 6, 9, 12];
 
     this.state = {
       domain: [0, 12],
@@ -85,4 +85,6 @@ class App extends React.Component {
     );
   }
 }
+
+export default CompoundSlider
 
