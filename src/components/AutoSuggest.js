@@ -158,7 +158,7 @@ class ReactAutosuggest extends React.Component {
       this.setState(({ value, sliderItems }) => ({
         value: [...value, chip],
         textFieldInput: '',
-        sliderItems: [...sliderItems, {'key': chip, 'sliderValue': 0}]
+        sliderItems: [...sliderItems, {'key': chip, 'sliderValue': 0, 'color': '#FFFFFF'}]
       }))
     }
   }
@@ -181,8 +181,9 @@ class ReactAutosuggest extends React.Component {
   updateSliderItems (sliderObject) {
     let key = sliderObject.key;
     let sliderValue = sliderObject.sliderValue;
+    let color = sliderObject.color;
     this.setState ({
-      sliderItems: this.state.sliderItems.map(el => el.key === key ? Object.assign({}, el, { sliderValue }) : el)
+      sliderItems: this.state.sliderItems.map(el => el.key === key ? Object.assign({}, el, { sliderValue, color}) : el),
     });
   }
 
@@ -197,8 +198,8 @@ class ReactAutosuggest extends React.Component {
     return (
       <Grid spacing={3} alignItems="flex-start" justify="center" container className={classes.grid}>
         <Grid item xs={12}>
-          <svg width="100%" height={200}> 
-          <DotBarChart dotSize={10} data={this.state.sliderItems}/>
+          <svg width="100%" height={120} style={{borderBottom: '0.01em solid'}}> 
+          <DotBarChart dotSize={8} data={this.state.sliderItems}/>
           </svg>
         </Grid>
         <Grid item xs={12} md={6}>

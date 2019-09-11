@@ -72,7 +72,7 @@ class SimpleTabs extends Component {
         <Grid container justify="center">
           <Grid spacing={0} alignItems="flex-start" justify="center" container className={classes.grid}>
             <Grid item xs={12} md={8}>
-              <AppBar position="static" style={{boxShadow: "none"}}>
+              <AppBar position="static" style={{boxShadow: "bottom"}}>
                 <Grid item xs={12}>
                   <Tabs value={activeTab} onChange={this.handleChange}>
                     <Tab label="Design" {...a11yProps(0)} />
@@ -92,7 +92,7 @@ class SimpleTabs extends Component {
               </TabPanel>
             </Grid>
             <Grid item xs={12} md={4}>
-              <AppBar position="static" style={{boxShadow: "none"}}>
+              <AppBar position="static" style={{boxShadow: "bottom"}}>
                 <Tabs value={0} centered>
                 <Tab label="Summary" disableFocusRipple={true} disableRipple={true} {...a11yProps(0)} />
                 </Tabs>

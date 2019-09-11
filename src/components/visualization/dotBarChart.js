@@ -1,19 +1,16 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import * as d3 from 'd3';
-import chroma from "chroma-js"
 
 class DotBarChart extends React.Component {
-
-  color = chroma.scale(["#B6002A", "#0E3B43", "#357266", "#A3BBAD"]).mode("lch")
 
 	render() {
 
     const { dotSize, data } = this.props
     const data2 = data.map(d => d.sliderValue)
+    const colorData = data.map(d => d.color)
     const width = data.length * 2 * dotSize + (data.length) * dotSize;
     const height = 5 * 2 * dotSize + 5 * dotSize;
-
 
     const x = d3.scaleLinear()
       .domain([0, data.length])
@@ -34,7 +31,7 @@ class DotBarChart extends React.Component {
     return (
       <svg x="50%" overflow="visible">
         <g
-          transform={`translate(${-width*0.5}, ${-dotSize})`}
+          transform={`translate(${-width*0.5}, ${-1.5*dotSize})`}
           >
           {newData.map((column, index) => ( 
               <g
@@ -47,7 +44,7 @@ class DotBarChart extends React.Component {
                     cy={y(circleNumber)}
                     r={dotSize}
                     key={circleNumber}
-                    fill={this.color( index / 30)}
+                    fill={colorData[index]}
                   />
                   ))
                 }
