@@ -2,7 +2,6 @@ import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import PropTypes from 'prop-types';
-import { Divider } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {

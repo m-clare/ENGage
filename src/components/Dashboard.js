@@ -4,9 +4,7 @@ import { withRouter } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Chart from 'react-google-charts';
 import SimpleTabs from './TabPanel';
-import SummaryPanel from './SummaryPanel';
 
 
 const styles = theme => ({
@@ -37,8 +35,6 @@ const styles = theme => ({
   }
 });
 
-// const tabValues = 
-
 class Dashboard extends Component {
 
   render() {
@@ -54,9 +50,9 @@ class Dashboard extends Component {
                 <Grid container justify="center">
                   <Grid spacing={3} alignItems="flex-start" justify="center" container className={classes.grid}>
                     <Grid item xs={12}>
-                      <Typography variant="h6" gutterBottom>ENGage Dashboard</Typography>
-                        <Typography variant="body1">
-                          Skills Matrix
+                      <Typography variant="h4" gutterBottom>ENGage Dashboard</Typography>
+                        <Typography variant="h5">
+                          Skills Matrix and Experience Tracking for Engineers
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>

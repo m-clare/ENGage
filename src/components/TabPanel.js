@@ -50,6 +50,57 @@ const styles = theme => ({
   },
 });
 
+const designSuggestions = [{name: 'concrete-reinforced-beams'}, 
+                           {name: 'concrete-reinforced-columns'}, 
+                           {name: 'composite-slab-on-deck'}, 
+                           {name: 'steel-connection-detailing'}, 
+                           {name: 'concrete-connection-detailing'}, 
+                           {name: 'concrete-prestressed-beams'}, 
+                           {name: 'concrete-prestressed-slabs'}, 
+                           {name: 'concrete-strut-and-tie'}, 
+                           {name: 'concrete-shear-walls'}, 
+                           {name: 'steel-baseplates'}, 
+                           {name: 'steel-gusset-plates'}, 
+                           {name: 'steel-moment-frames'}, 
+                           {name: 'steel-braced-frames'}, 
+                           {name: 'steel-seismic-detailing'}, 
+                           {name: 'concrete-seismic-detailing'}, 
+                           {name: 'mass-timber'}, 
+                           {name: 'CLT-timber'}, 
+                           {name: 'timber-concrete-composite'}, 
+                           {name: 'masonry-walls'}, 
+                           {name: 'concrete-reinforced-footings'}, 
+                           {name: 'concrete-slab-on-grade'}, 
+                           {name: 'concrete-spread-footings'},
+                           {name: 'pile-cap-design'}, 
+                           {name: 'concrete-raft-foundations'}]
+
+const analysisSuggestions = [{name: 'linear-elastic-analysis'}, 
+                             {name: 'nonlinear-geometric-analysis'},
+                             {name: 'nonlinear-material-analysis'}, 
+                             {name: 'nonlinear-time-history-analysis'},
+                             {name: 'performance-based-design-seismic'},
+                             {name: 'performance-based-design-wind'},
+                             {name: 'ANSYS'},
+                             {name: 'ABAQUS'},
+                             {name: 'SOFiSTiK'},
+                             {name: 'RAM Steel'},
+                             {name: 'Perform3D'},
+                             {name: 'ADAPT PT'},
+                             {name: 'LUSAS'},
+                             {name: 'SAP2000'},
+                             {name: 'ETABS'},
+                             {name: 'LS-DYNA'}]
+
+const constructionSuggestions = [{name: 'pt-shop-review'}, 
+                                 {name: 'rc-shop-review'},
+                                 {name: 'rc-special-inspection'},
+                                 {name: 'steel-special-inspection'},
+                                 {name: 'pt-special-inspection'},
+                                 {name: 'steel-connection-shop-review'},
+                                 {name: 'RFI-response'},
+                                 {name: 'structural-sketch-response'}]
+
 class SimpleTabs extends Component {
 
   constructor(props) {
@@ -82,13 +133,13 @@ class SimpleTabs extends Component {
                 </Grid>
               </AppBar>
               <TabPanel activetab={activeTab} index={0} >
-                <ReactAutosuggest style={{'width':'100%'}}/>
+                <ReactAutosuggest inputsuggestions={designSuggestions} style={{'width':'100%'}}/>
               </TabPanel>
               <TabPanel activetab={activeTab} index={1}>
-                <ReactAutosuggest style={{'width':'100%'}}/>
+                <ReactAutosuggest inputsuggestions={analysisSuggestions} style={{'width':'100%'}}/>
               </TabPanel>
               <TabPanel activetab={activeTab} index={2}>
-                <ReactAutosuggest style={{'width':'100%'}}/>
+                <ReactAutosuggest inputsuggestions={constructionSuggestions} style={{'width':'100%'}}/>
               </TabPanel>
             </Grid>
             <Grid item xs={12} md={4}>

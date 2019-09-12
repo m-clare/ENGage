@@ -74,14 +74,14 @@ function getSuggestionValue (suggestion) {
   return suggestion.name
 }
 
-function getSuggestions (value) {
+function getSuggestions (value, inputsuggestions) {
   const inputValue = value.trim().toLowerCase()
   const inputLength = inputValue.length
   let count = 0
 
   return inputLength === 0
     ? []
-    : suggestions.filter(suggestion => {
+    : inputsuggestions.filter(suggestion => {
       const keep =
           count < 5 && suggestion.name.toLowerCase().slice(0, inputLength) === inputValue
 
@@ -132,12 +132,13 @@ class ReactAutosuggest extends React.Component {
     };
 
   this.updateSliderItems = this.updateSliderItems.bind(this);
+  this.handleSuggestionsFetchRequested = this.handleSuggestionsFetchRequested.bind(this);
   }
 
 
   handleSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      suggestions: getSuggestions(value)
+      suggestions: getSuggestions(value, this.props.inputsuggestions)
     })
   };
 

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Slider from '@material-ui/core/Slider';
-import chroma from "chroma-js"
-import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 const marks = [
   {

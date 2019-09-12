@@ -1,11 +1,9 @@
-import React from 'react'
-import RangeSlider from './CompoundSlider'
-import { withStyles } from '@material-ui/core/styles';
+import React, { Component } from 'react'
 import UsersByDevice from './visualization/donutChart';
 import Grid from '@material-ui/core/Grid';
 import CompoundSlider from './CompoundSlider';
 
-class SummaryPanel extends React.Component {
+class SummaryPanel extends Component {
 
 	render() {
 
