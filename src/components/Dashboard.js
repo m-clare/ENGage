@@ -5,6 +5,8 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import SimpleTabs from './TabPanel';
+import SimpleExpansionPanel from './SimpleExpansionPanel';
+import SummaryPanel from './SummaryPanel';
 
 
 const styles = theme => ({
@@ -35,6 +37,57 @@ const styles = theme => ({
   }
 });
 
+const designSuggestions = [{name: 'concrete-reinforced-beams'}, 
+                           {name: 'concrete-reinforced-columns'}, 
+                           {name: 'composite-slab-on-deck'}, 
+                           {name: 'steel-connection-detailing'}, 
+                           {name: 'concrete-connection-detailing'}, 
+                           {name: 'concrete-prestressed-beams'}, 
+                           {name: 'concrete-prestressed-slabs'}, 
+                           {name: 'concrete-strut-and-tie'}, 
+                           {name: 'concrete-shear-walls'}, 
+                           {name: 'steel-baseplates'}, 
+                           {name: 'steel-gusset-plates'}, 
+                           {name: 'steel-moment-frames'}, 
+                           {name: 'steel-braced-frames'}, 
+                           {name: 'steel-seismic-detailing'}, 
+                           {name: 'concrete-seismic-detailing'}, 
+                           {name: 'mass-timber'}, 
+                           {name: 'CLT-timber'}, 
+                           {name: 'timber-concrete-composite'}, 
+                           {name: 'masonry-walls'}, 
+                           {name: 'concrete-reinforced-footings'}, 
+                           {name: 'concrete-slab-on-grade'}, 
+                           {name: 'concrete-spread-footings'},
+                           {name: 'pile-cap-design'}, 
+                           {name: 'concrete-raft-foundations'}]
+
+const analysisSuggestions = [{name: 'linear-elastic-analysis'}, 
+                             {name: 'nonlinear-geometric-analysis'},
+                             {name: 'nonlinear-material-analysis'}, 
+                             {name: 'nonlinear-time-history-analysis'},
+                             {name: 'performance-based-design-seismic'},
+                             {name: 'performance-based-design-wind'},
+                             {name: 'ANSYS'},
+                             {name: 'ABAQUS'},
+                             {name: 'SOFiSTiK'},
+                             {name: 'RAM Steel'},
+                             {name: 'Perform3D'},
+                             {name: 'ADAPT PT'},
+                             {name: 'LUSAS'},
+                             {name: 'SAP2000'},
+                             {name: 'ETABS'},
+                             {name: 'LS-DYNA'}]
+
+const constructionSuggestions = [{name: 'pt-shop-review'}, 
+                                 {name: 'rc-shop-review'},
+                                 {name: 'rc-special-inspection'},
+                                 {name: 'steel-special-inspection'},
+                                 {name: 'pt-special-inspection'},
+                                 {name: 'steel-connection-shop-review'},
+                                 {name: 'RFI-response'},
+                                 {name: 'structural-sketch-response'}]
+
 class Dashboard extends Component {
 
   render() {
@@ -45,7 +98,7 @@ class Dashboard extends Component {
       <div className={classes.root}>
         <Grid container justify="center">
           <Grid spacing={1} alignItems="flex-start" justify="center" container className={classes.grid}>
-            <Grid item xs={12} lg={11} md={11}>
+            <Grid item xs={12} lg={12} md={12}>
               <Paper className={classes.paper}>
                 <Grid container justify="center">
                   <Grid spacing={3} alignItems="flex-start" justify="center" container className={classes.grid}>
@@ -55,8 +108,22 @@ class Dashboard extends Component {
                           Skills Matrix and Experience Tracking for Engineers
                         </Typography>
                     </Grid>
-                    <Grid item xs={12}>
-                    <SimpleTabs />
+                    <Grid item xs={12} md={8}>
+                    <SimpleExpansionPanel 
+                      style={{width: "100%"}}
+                      inputsuggestions={designSuggestions} 
+                      title="Design"/>
+                    <SimpleExpansionPanel
+                      style={{width: "100%"}} 
+                      inputsuggestions={analysisSuggestions} 
+                      title="Analysis"/>
+                    <SimpleExpansionPanel 
+                      style={{width: "100%"}}
+                      inputsuggestions={constructionSuggestions}
+                      title="Construction"/>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                    <SummaryPanel />
                     </Grid>
                   </Grid>
                 </Grid>

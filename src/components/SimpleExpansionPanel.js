@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Autosuggest from 'react-autosuggest'
 import match from 'autosuggest-highlight/match'
 import parse from 'autosuggest-highlight/parse'
 import Paper from '@material-ui/core/Paper'
+import Box from '@material-ui/core/Box'
 import MenuItem from '@material-ui/core/MenuItem'
 import { withStyles } from '@material-ui/core/styles'
 import ChipInput from 'material-ui-chip-input'
 import Sliders from './SliderPanel'
 import Grid from '@material-ui/core/Grid'
 import DotBarChart from './visualization/dotBarChart';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 function renderInput (inputProps) {
   const { value, onChange, chips, ref, ...other } = inputProps
@@ -114,7 +120,7 @@ const styles = theme => ({
   },
 })
 
-class ReactAutosuggest extends React.Component {
+class SimpleExpansionPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -188,54 +194,67 @@ class ReactAutosuggest extends React.Component {
     });
 
   render() {
-    const { classes, suggestions, ...other } = this.props
+    const { classes, suggestions, title, ...other } = this.props
 
     return (
-      <Grid spacing={3} alignItems="flex-start" justify="center" container className={classes.grid}>
-        <Grid item xs={12}>
-          <svg width="100%" height={120} style={{borderBottom: '0.01em solid'}}> 
-          <DotBarChart dotSize={8} data={this.state.sliderItems}/>
-          </svg>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Autosuggest
-            theme={{
-              container: classes.container,
-              suggestionsContainerOpen: classes.suggestionsContainerOpen,
-              suggestionsList: classes.suggestionsList,
-              suggestion: classes.suggestion
-            }}
-            renderInputComponent={renderInput}
-            suggestions={this.state.suggestions}
-            onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
-            onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
-            renderSuggestionsContainer={renderSuggestionsContainer}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            onSuggestionSelected={(e, { suggestionValue }) => { this.handleAddChip(suggestionValue); e.preventDefault() }}
-            focusInputOnSuggestionClick={false}
-            inputProps={{
-              chips: this.state.value,
-              value: this.state.textFieldInput,
-              onChange: this.handletextFieldInputChange,
-              onAdd: (chip) => this.handleAddChip(chip),
-              onDelete: (chip, index) => this.handleDeleteChip(chip, index),
-              ...other
-            }}
-
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Sliders chipTextBoxValue={this.state.value} updateSliderItems={this.updateSliderItems}/>
-        </Grid>
-      </Grid>
+      <ExpansionPanel>
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          > <Grid container>
+            <Grid item xs={12}>
+            <Typography variant="h6">{title}</Typography>
+            </Grid>
+            <Grid item xs={12}>
+            <svg height={120} width="100%" style={{borderBottom: '0.01em solid'}}> 
+            <DotBarChart dotSize={8} data={this.state.sliderItems}/>
+            </svg>
+            </Grid>
+            </Grid>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Grid spacing={3} alignItems="flex-start" justify="center" container className={classes.grid}>
+              <Grid item xs={12} md={6}>
+                <Autosuggest
+                  theme={{
+                    container: classes.container,
+                    suggestionsContainerOpen: classes.suggestionsContainerOpen,
+                    suggestionsList: classes.suggestionsList,
+                    suggestion: classes.suggestion
+                  }}
+                  renderInputComponent={renderInput}
+                  suggestions={this.state.suggestions}
+                  onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
+                  onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
+                  renderSuggestionsContainer={renderSuggestionsContainer}
+                  getSuggestionValue={getSuggestionValue}
+                  renderSuggestion={renderSuggestion}
+                  onSuggestionSelected={(e, { suggestionValue }) => { this.handleAddChip(suggestionValue); e.preventDefault() }}
+                  focusInputOnSuggestionClick={false}
+                  inputProps={{
+                    chips: this.state.value,
+                    value: this.state.textFieldInput,
+                    onChange: this.handletextFieldInputChange,
+                    onAdd: (chip) => this.handleAddChip(chip),
+                    onDelete: (chip, index) => this.handleDeleteChip(chip, index),
+                    ...other
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Sliders chipTextBoxValue={this.state.value} updateSliderItems={this.updateSliderItems}/>
+              </Grid>
+            </Grid>
+          </ExpansionPanelDetails>
+      </ExpansionPanel>
     )
   }
 }
 
-ReactAutosuggest.propTypes = {
+SimpleExpansionPanel.propTypes = {
   allowDuplicates: PropTypes.bool,
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(ReactAutosuggest)
+export default withStyles(styles)(SimpleExpansionPanel)
