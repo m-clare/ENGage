@@ -89,9 +89,11 @@ const constructionSuggestions = [{name: 'pt-shop-review'},
                                  {name: 'RFI-response'},
                                  {name: 'structural-sketch-response'}]
 
-const designColors = ["#B6002A", chroma("#B6002A").brighten(3)]
-const analysisColors = ["#0E3B43", chroma("#0E3B43").brighten(3)]
-const constructionColors = ["#357266", chroma("#357266").brighten(3)]
+const designColors = ["#283593", "#3949AB", "#7986CB"]
+const analysisColors = ["#00838F", "#00BCD4", "#4DD0E1"]
+const constructionColors = ["#FF6F00","#FFC107", "#FFD54F"]
+
+
 
 class Dashboard extends Component {
 

@@ -9,7 +9,9 @@ class Sliders extends Component {
     let sliderPanel = []
     let numberSliders = this.props.chipTextBoxValue.length
 
-    const color = chroma.scale([slidercolors[0], slidercolors[1], slidercolors[0]]).mode("lch")
+    const color = chroma.scale([slidercolors[0], slidercolors[1],
+                                slidercolors[2], slidercolors[1], 
+                                slidercolors[0]]).mode("lch")
 
     for (let i = 0; i < numberSliders; i++) {
       sliderPanel.push(
@@ -18,7 +20,7 @@ class Sliders extends Component {
             {this.props.chipTextBoxValue[i]}
           </Typography>
           <CustomSlider sliderTitle={this.props.chipTextBoxValue[i]} updateSliderItems={this.props.updateSliderItems}
-           color={color((i % 4) / 4).hex()}
+           color={color((i % 6) / 6).hex()}
           />
         </div>
       )
