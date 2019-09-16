@@ -194,7 +194,7 @@ class SimpleExpansionPanel extends Component {
     });
 
   render() {
-    const { classes, suggestions, title, ...other } = this.props
+    const { classes, suggestions, title, slidercolors, ...other } = this.props
 
     return (
       <ExpansionPanel>
@@ -203,8 +203,8 @@ class SimpleExpansionPanel extends Component {
             aria-controls="panel1a-content"
             id="panel1a-header"
           > <Grid container>
+              <Typography variant="h6">{title}</Typography>
             <Grid item xs={12}>
-            <Typography variant="h6">{title}</Typography>
             </Grid>
             <Grid item xs={12}>
             <svg height={120} width="100%" style={{borderBottom: '0.01em solid'}}> 
@@ -243,7 +243,7 @@ class SimpleExpansionPanel extends Component {
                 />
               </Grid>
               <Grid item xs={12} md={6}>
-                <Sliders chipTextBoxValue={this.state.value} updateSliderItems={this.updateSliderItems}/>
+                <Sliders chipTextBoxValue={this.state.value} updateSliderItems={this.updateSliderItems} slidercolors={slidercolors}/>
               </Grid>
             </Grid>
           </ExpansionPanelDetails>

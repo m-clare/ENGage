@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import SimpleTabs from './TabPanel';
 import SimpleExpansionPanel from './SimpleExpansionPanel';
 import SummaryPanel from './SummaryPanel';
+import chroma from "chroma-js";
 
 
 const styles = theme => ({
@@ -88,6 +89,10 @@ const constructionSuggestions = [{name: 'pt-shop-review'},
                                  {name: 'RFI-response'},
                                  {name: 'structural-sketch-response'}]
 
+const designColors = ["#B6002A", chroma("#B6002A").brighten(3)]
+const analysisColors = ["#0E3B43", chroma("#0E3B43").brighten(3)]
+const constructionColors = ["#357266", chroma("#357266").brighten(3)]
+
 class Dashboard extends Component {
 
   render() {
@@ -112,15 +117,18 @@ class Dashboard extends Component {
                     <SimpleExpansionPanel 
                       style={{width: "100%"}}
                       inputsuggestions={designSuggestions} 
-                      title="Design"/>
+                      title="Design"
+                      slidercolors={designColors}/>
                     <SimpleExpansionPanel
                       style={{width: "100%"}} 
                       inputsuggestions={analysisSuggestions} 
-                      title="Analysis"/>
+                      title="Analysis"
+                      slidercolors={analysisColors}/>
                     <SimpleExpansionPanel 
                       style={{width: "100%"}}
                       inputsuggestions={constructionSuggestions}
-                      title="Construction"/>
+                      title="Construction"
+                      slidercolors={constructionColors}/>
                     </Grid>
                     <Grid item xs={12} md={4}>
                     <SummaryPanel />

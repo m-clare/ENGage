@@ -188,7 +188,7 @@ class ReactAutosuggest extends React.Component {
     });
 
   render() {
-    const { classes, suggestions, ...other } = this.props
+    const { classes, suggestions, slidercolors, ...other } = this.props
 
     return (
       <Grid spacing={3} alignItems="flex-start" justify="center" container className={classes.grid}>
@@ -226,7 +226,7 @@ class ReactAutosuggest extends React.Component {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <Sliders chipTextBoxValue={this.state.value} updateSliderItems={this.updateSliderItems}/>
+          <Sliders chipTextBoxValue={this.state.value} updateSliderItems={this.updateSliderItems} slidercolors={slidercolors}/>
         </Grid>
       </Grid>
     )

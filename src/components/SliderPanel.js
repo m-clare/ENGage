@@ -3,14 +3,13 @@ import Typography from '@material-ui/core/Typography';
 import CustomSlider from './CustomSlider';
 import chroma from "chroma-js"
 
-const color = chroma.scale(["#B6002A", "#0E3B43", "#357266",
-                            "#A3BBAD", "#357266", "#0E3B43"]).mode("lch")
+class Sliders extends Component {  
 
-class Sliders extends Component {
-
-  createSliders = () => {
+  createSliders = (slidercolors) => {
     let sliderPanel = []
     let numberSliders = this.props.chipTextBoxValue.length
+
+    const color = chroma.scale([slidercolors[0], slidercolors[1], slidercolors[0]]).mode("lch")
 
     for (let i = 0; i < numberSliders; i++) {
       sliderPanel.push(
@@ -19,7 +18,7 @@ class Sliders extends Component {
             {this.props.chipTextBoxValue[i]}
           </Typography>
           <CustomSlider sliderTitle={this.props.chipTextBoxValue[i]} updateSliderItems={this.props.updateSliderItems}
-           color={color((i % 12) / 12).hex()}
+           color={color((i % 4) / 4).hex()}
           />
         </div>
       )
@@ -29,9 +28,11 @@ class Sliders extends Component {
   }
 
 	render() {
+    const { slidercolors } = this.props
+
 		return (
       <div>
-        {this.createSliders()}
+        {this.createSliders(slidercolors)}
       </div>
 	  );
 	}
