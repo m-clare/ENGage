@@ -89,9 +89,9 @@ const constructionSuggestions = [{name: 'pt-shop-review'},
                                  {name: 'RFI-response'},
                                  {name: 'structural-sketch-response'}]
 
-const designColors = ["#283593", "#3949AB", "#7986CB"]
-const analysisColors = ["#00838F", "#00BCD4", "#4DD0E1"]
-const constructionColors = ["#FF6F00","#FFC107", "#FFD54F"]
+const designColors = ["#283593", "#C5CAF9"]
+const analysisColors = ["#00838F", "#B2EBF2"]
+const constructionColors = ["#FF8F00", "#FFECB3"]
 
 
 

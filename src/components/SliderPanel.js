@@ -10,7 +10,6 @@ class Sliders extends Component {
     let numberSliders = this.props.chipTextBoxValue.length
 
     const color = chroma.scale([slidercolors[0], slidercolors[1],
-                                slidercolors[2], slidercolors[1], 
                                 slidercolors[0]]).mode("lch")
 
     for (let i = 0; i < numberSliders; i++) {
