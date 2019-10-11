@@ -17,6 +17,10 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+function escapeRegexCharacters(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function renderInput (inputProps) {
   const { value, onChange, chips, ref, ...other } = inputProps
 
@@ -75,7 +79,7 @@ function getSuggestionValue (suggestion) {
 }
 
 function getSuggestions (value, inputsuggestions) {
-  const inputValue = value.trim().toLowerCase()
+  const inputValue = escapeRegexCharacters(value.trim().toLowerCase());
   const inputLength = inputValue.length
   let count = 0
 
@@ -225,6 +229,7 @@ class SimpleExpansionPanel extends Component {
                   }}
                   renderInputComponent={renderInput}
                   suggestions={this.state.suggestions}
+                  alwaysRenderSuggestions={true}
                   onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
                   onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
                   renderSuggestionsContainer={renderSuggestionsContainer}
