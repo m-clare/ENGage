@@ -24,6 +24,14 @@ class ConcentricRingChart extends Component {
 
     const arc = d3.arc();
 
+    const gs = svg.selectAll("g").data(d3.values(dataset)).enter().append("g");
+
+    const path = gs.selectAll("path")
+            .data(function(d) { return pie(d); })
+            .enter().append("path")
+            .attr("fill", function(d, i) { return color(i); })
+            .attr("d", function(d, i, j) { return arc.innerRadius(10+cwidth*j).outerRadius(cwidth*(j+1))(d); });
+
     return (
         <svg width={width} height={height}>
         <g
@@ -32,19 +40,6 @@ class ConcentricRingChart extends Component {
         </g>
         </svg>
         )
-
-    // const svg = d3.select("body").append("svg")
-    //     .attr("width", width)
-    //     .attr("height", height)
-    //     .append("g")
-    //     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-    // const gs = svg.selectAll("g").data(d3.values(dataset)).enter().append("g");
-    // const path = gs.selectAll("path")
-    //     .data(function(d) { return pie(d); })
-    //     .enter().append("path")
-    //     .attr("fill", function(d, i) { return color(i); })
-    //     .attr("d", function(d, i, j) { return arc.innerRadius(10+cwidth*j).outerRadius(cwidth*(j+1))(d); });
     }
 }
 
